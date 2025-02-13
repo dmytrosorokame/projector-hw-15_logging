@@ -1,0 +1,47 @@
+long_query_time = 1
+
+Transactions:                 145    hits
+Availability:                 100.00 %
+Elapsed time:                  60.28 secs
+Data transferred:               0.01 MB
+Response time:              17047.31 ms
+Transaction rate:               2.41 trans/sec
+Throughput:                     0.00 MB/sec
+Concurrency:                   41.01
+Successful transactions:      145
+Failed transactions:            0
+Longest transaction:        20270.00 ms
+Shortest transaction:        2070.00 ms
+
+
+long_query_time = 0
+
+Transactions:                 150    hits
+Availability:                 100.00 %
+Elapsed time:                  60.81 secs
+Data transferred:               0.01 MB
+Response time:              17090.54 ms
+Transaction rate:               2.47 trans/sec
+Throughput:                     0.00 MB/sec
+Concurrency:                   42.16
+Successful transactions:      150
+Failed transactions:            0
+Longest transaction:        20220.00 ms
+Shortest transaction:        2060.00 ms
+
+
+long_query_time = 10
+
+Lifting the server siege...
+Transactions:                 150    hits
+Availability:                 100.00 %
+Elapsed time:                  60.52 secs
+Data transferred:               0.01 MB
+Response time:              17095.47 ms
+Transaction rate:               2.48 trans/sec
+Throughput:                     0.00 MB/sec
+Concurrency:                   42.37
+Successful transactions:      150
+Failed transactions:            0
+Longest transaction:        20220.00 ms
+Shortest transaction:        2170.00 ms

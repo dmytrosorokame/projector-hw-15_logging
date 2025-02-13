@@ -1,0 +1,45 @@
+long_query_time = 1
+
+Transactions:                 150    hits
+Availability:                 100.00 %
+Elapsed time:                  60.47 secs
+Data transferred:               0.01 MB
+Response time:              17082.80 ms
+Transaction rate:               2.48 trans/sec
+Throughput:                     0.00 MB/sec
+Concurrency:                   42.38
+Successful transactions:      150
+Failed transactions:            0
+Longest transaction:        20210.00 ms
+Shortest transaction:        2070.00 ms
+
+
+long_query_time = 0
+
+Transactions:                 145    hits
+Availability:                 100.00 %
+Elapsed time:                  60.30 secs
+Data transferred:               0.01 MB
+Response time:              16996.83 ms
+Transaction rate:               2.40 trans/sec
+Throughput:                     0.00 MB/sec
+Concurrency:                   40.87
+Successful transactions:      145
+Failed transactions:            0
+Longest transaction:        20190.00 ms
+Shortest transaction:        2150.00 ms
+
+long_query_time = 10
+
+Transactions:                 150    hits
+Availability:                 100.00 %
+Elapsed time:                  60.70 secs
+Data transferred:               0.01 MB
+Response time:              17105.00 ms
+Transaction rate:               2.47 trans/sec
+Throughput:                     0.00 MB/sec
+Concurrency:                   42.27
+Successful transactions:      150
+Failed transactions:            0
+Longest transaction:        20200.00 ms
+Shortest transaction:        2140.00 ms

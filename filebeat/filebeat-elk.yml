@@ -1,0 +1,9 @@
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /var/log/mysql/mysql-slow.log
+  scan_frequency: 10s
+
+output.logstash:
+  hosts: ["logstash:5044"]

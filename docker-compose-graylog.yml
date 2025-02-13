@@ -1,0 +1,77 @@
+version: "3.7"
+services:
+  mongodb:
+    image: mongo:4.2
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - "27017:27017"
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.0
+    environment:
+      - discovery.type=single-node
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+
+  graylog:
+    image: graylog/graylog:4.2
+    environment:
+      GRAYLOG_PASSWORD_SECRET: "mysupersecretpassword"
+      GRAYLOG_ROOT_PASSWORD_SHA2: "f043c350d733e63ffb7d66987f0a5577f896077c64b400324541ebd60befa888"
+      GRAYLOG_HTTP_EXTERNAL_URI: "http://127.0.0.1:9000/"
+      GRAYLOG_MONGODB_URI: "mongodb://mongodb:27017/graylog"
+      GRAYLOG_ELASTICSEARCH_HOSTS: "http://elasticsearch:9200"
+    depends_on:
+      - elasticsearch
+      - mongodb
+    ports:
+      - "9000:9000"
+      - "1514:1514"
+      - "1514:1514/udp"
+      - "12201:12201"
+      - "12201:12201/udp"
+      - "5044:5044"
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: mydb
+    volumes:
+      - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf:ro
+      - mysql_data:/var/lib/mysql
+      - mysql-logs:/var/log/mysql
+    ports:
+      - "3306:3306"
+
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:7.17.0
+    restart: always
+    user: root
+    volumes:
+      - ./filebeat/filebeat-graylog.yml:/usr/share/filebeat/filebeat.yml:ro
+      - mysql-logs:/var/log/mysql
+    depends_on:
+      - mysql
+
+  api:
+    build: ./api
+    environment:
+      - DB_HOST=mysql
+      - DB_USER=root
+      - DB_PASSWORD=example
+      - DB_DATABASE=mydb
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
+
+volumes:
+  mongo_data:
+  es_data:
+  mysql_data:
+  mysql-logs:
